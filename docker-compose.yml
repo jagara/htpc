@@ -191,38 +191,4 @@ services:
 #      - PGID=${SERV_PGID:?err}
 #    restart: unless-stopped
 #    network_mode: host
-  
-#  motioneye:
-#    image: ccrisan/motioneye:master-amd64  # Change to ccrisan/motioneye:master-armhf for ARM chips (Pi etc.)
-#    ports:
-#      - "8081:8081"
-#      - "8765:8765"
-#    volumes:
-#      - ${SERV_CFG_ROOT:?err}/motioneye:/etc/motioneye
-#      - ${SERV_STORAGE_PATH:?err}/motioneye:/var/lib/motioneye
-#      - /etc/localtime:/etc/localtime:ro
-#        #- etc_motioneye:/etc/motioneye
-#        #- var_lib_motioneye:/var/lib/motioneye
-#    environment:
-#      - TZ=Europe/Sofia
-#      - PUID=${SERV_PUID:?err}
-#      - PGID=${SERV_PGID:?err}
-#    labels:
-#      - 'com.centurylinklabs.watchtower.enable=true'
-#  openhab:
-#    image: "openhab/openhab:2.5.10"
-#    restart: unless-stopped
-#    network_mode: host
-#    ports:
-#      - "8080:8080"
-#      - "8443:8443"
-#    volumes:
-#      - ${SERV_STORAGE_PATH:?err}/openhab_addons:/openhab/addons
-#      - ${SERV_CFG_ROOT:?err}/openhab_conf:/openhab/conf
-#      - ${SERV_STORAGE_PATH:?err}/openhab_userdata:/openhab/userdata
-#      - "/etc/localtime:/etc/localtime:ro"
-#      - "/etc/timezone:/etc/timezone:ro"
-#    environment:
-#      OPENHAB_HTTP_PORT: "8080"
-#      OPENHAB_HTTPS_PORT: "8443"
-#      EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Sofia" 
+ 
