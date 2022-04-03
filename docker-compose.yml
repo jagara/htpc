@@ -45,7 +45,7 @@ services:
       - 'com.centurylinklabs.watchtower.enable=true'
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce
     networks:
       - int
     ports:
@@ -157,6 +157,34 @@ services:
       - ${SERV_STORAGE_PATH:?err}/tv:/tv
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
+
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    ports:
+      - 32400:32400/tcp
+      - 3005:3005/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    environment:
+      - PLEX_UID=${SERV_PUID:?err}
+      - PLEX_GID=${SERV_PGID:?err}
+      - TZ=Europe/Sofia
+      - PLEX_CLAIM=claim-mn1diTxpnsAyD5bY-Dng
+      - ADVERTISE_IP=http://192.168.1.101:32400/
+    hostname: medialts_plex
+    volumes:
+      - ${SERV_CFG_ROOT:?err}/plex:/config
+      - ${SERV_STORAGE_PATH:?err}/plex/transcode:/transcode
+      - ${SERV_STORAGE_PATH:?err}/movies:/movies
+      - ${SERV_STORAGE_PATH:?err}/tv:/tv
+ 
 # Watchtower - Automatic Update of Containers/Apps
   watchtower:
     container_name: watchtower
