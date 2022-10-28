@@ -82,7 +82,7 @@ services:
 
   sonarr:
     depends_on:
-      - jackett
+      - prowlarr
     image: linuxserver/sonarr
     networks:
       - int
@@ -105,7 +105,7 @@ services:
 
   radarr:
     depends_on:
-      - jackett
+      - prowlarr
     image: linuxserver/radarr
     networks:
       - int
@@ -126,21 +126,21 @@ services:
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
 
-  jackett:
-    image: linuxserver/jackett
-    networks:
-      - int
-    ports:
-      - '9117:9117'
-    restart: unless-stopped
-    environment:
-      - TZ=Europe/Sofia
-      - PUID=${SERV_PUID:?err}
-      - PGID=${SERV_PGID:?err}
-    volumes:
-      - ${SERV_CFG_ROOT:?err}/jackett:/config
-    labels:
-      - 'com.centurylinklabs.watchtower.enable=true'
+        #jackett:
+        #    image: linuxserver/jackett
+        #    networks:
+        #      - int
+        #    ports:
+        #      - '9117:9117'
+        #    restart: unless-stopped
+        #    environment:
+        #      - TZ=Europe/Sofia
+        #      - PUID=${SERV_PUID:?err}
+        #      - PGID=${SERV_PGID:?err}
+        #    volumes:
+        #      - ${SERV_CFG_ROOT:?err}/jackett:/config
+        #    labels:
+        #      - 'com.centurylinklabs.watchtower.enable=true'
 
   bazarr: 
     depends_on:
