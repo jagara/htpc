@@ -197,6 +197,20 @@ services:
     ports:
       - 8080:8080
     restart: unless-stopped
+
+  rtl433:
+    image: hertzg/rtl_433:latest
+    container_name: rtl_433
+    devices:
+      - '/dev/bus/usb/002/002'
+    command:
+      - '-Mtime:unix:usec:utc'
+      - '-Mbits'
+      - '-Mlevel'
+      - '-Mprotocol'
+      - '-Mstats:2:300'
+      - '-Fmqtt://192.168.1.16:1883,retain=1'
+      - '-Finflux://192.168.1.102:8086/write?db=rtl433'
 # Watchtower - Automatic Update of Containers/Apps
   watchtower:
     container_name: watchtower

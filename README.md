@@ -1,1 +1,2 @@
 # htpc
+htpc configurations 
