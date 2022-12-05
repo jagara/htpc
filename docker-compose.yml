@@ -181,6 +181,22 @@ services:
     labels:
       - 'com.centurylinklabs.watchtower.enable=true'
 
+  shinobi:
+    image: registry.gitlab.com/shinobi-systems/shinobi:dev
+    container_name: Shinobi
+    environment:
+      - PLUGIN_KEYS=()
+      - SSL_ENABLED=false
+    volumes:
+      - ${SERV_CFG_ROOT:?err}/Shinobi/config:/config
+      - ${SERV_CFG_ROOT:?err}/Shinobi/customAutoLoad:/home/Shinobi/libs/customAutoLoad
+      - ${SERV_CFG_ROOT:?err}/Shinobi/database:/var/lib/mysql
+      - ${SERV_STORAGE_PATH:?err}/Shinobi/videos:/home/Shinobi/videos
+      - ${SERV_STORAGE_PATH:?err}/Shinobi/plugins:/home/Shinobi/plugins
+      - /dev/shm/Shinobi/streams:/dev/shm/streams
+    ports:
+      - 8080:8080
+    restart: unless-stopped
 # Watchtower - Automatic Update of Containers/Apps
   watchtower:
     container_name: watchtower
